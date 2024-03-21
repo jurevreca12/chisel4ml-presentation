@@ -1,0 +1,8 @@
+venv/
+.ipynb_checkpoints/
+*.anno.json
+*.fir
+*.v
+.~lock*
+diagrams/
+chisel4ml.jar
