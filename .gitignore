@@ -6,3 +6,6 @@ venv/
 .~lock*
 diagrams/
 chisel4ml.jar
+__pycache__/
+.Trash-1000/
+model.onnx

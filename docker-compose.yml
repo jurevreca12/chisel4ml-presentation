@@ -1,0 +1,11 @@
+services:
+  bootcamp:
+    image: c4ml-present:1.0
+    ports:
+      - "8888:8888"
+      - "5555:5555"
+    volumes:
+      - ${PWD}:/workdir
+    network_mode: host
+    stdin_open: true
+    tty: true
