@@ -2,7 +2,8 @@
 # docker compose up
 # First stage : setup the system and environment
 FROM ubuntu:22.04 AS base
-
+ENV TZ=GMT \
+    DEBIAN_FRONTEND=noninteractive
 RUN \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -17,7 +18,19 @@ RUN \
 				make \
         && \
     rm -rf /var/lib/apt/lists/*
-
+RUN apt-get update && \
+	  apt-get install -y --no-install-recommends texlive-xetex texlive-fonts-recommended texlive-plain-generic
+RUN apt-get update && \
+		apt-get install -y libatk1.0-0 \
+											 libatk-bridge2.0-0 \
+											 libatspi2.0-0 \
+											 libxcomposite1 \
+											 libxdamage1 \
+											 libxfixes3 \
+										   libxrandr2 \
+											 libgbm1 \
+											 libxkbcommon0 \
+											 libasound2 	 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python3 get-pip.py
 RUN pip3 install notebook
@@ -84,8 +97,7 @@ RUN git clone https://github.com/verilator/verilator && \
 		autoconf && \
 		./configure && \
     make -j 4  && \
-		make install 
-
+		make install
 WORKDIR /workdir
 USER bootcamp
 EXPOSE 8888
